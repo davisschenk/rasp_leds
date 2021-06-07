@@ -12,9 +12,9 @@ readonly SOURCE_PATH=./target/${TARGET_ARCH}/release/rasp_leds
 readonly ROCKET_MODE=staging
 
 # Build frontend and upload it to rasp_leds/build
-# cd frontend
-# npm run build
-# rsync -r ./build/ ${TARGET_HOST}:${TARGET_PATH}/build
+cd frontend
+npm run build
+rsync -r ./build/ ${TARGET_HOST}:${TARGET_PATH}/build
 
 # Build backend executable and upload it to rasp_leds/
 cd backend
