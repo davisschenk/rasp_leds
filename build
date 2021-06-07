@@ -17,7 +17,7 @@ npm run build
 rsync -r ./build/ ${TARGET_HOST}:${TARGET_PATH}/build
 
 # Build backend executable and upload it to rasp_leds/
-cd backend
+cd ../backend
 cargo build --release --target ${TARGET_ARCH}
 rsync ${SOURCE_PATH} ${TARGET_HOST}:${TARGET_PATH}/backend
 ssh -t ${TARGET_HOST} sudo ROCKET_ENV=${ROCKET_MODE} ${TARGET_PATH}/backend
