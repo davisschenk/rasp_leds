@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+set -o xtrace
+
+readonly TARGET_HOST=pi@192.168.0.6
+readonly TARGET_PATH=/home/pi/rasp_leds
+readonly TARGET_ARCH=armv7-unknown-linux-gnueabihf
+readonly SOURCE_PATH=./target/${TARGET_ARCH}/release/rasp_leds
+readonly ROCKET_MODE=staging
+
+# Build frontend and upload it to rasp_leds/build
+# cd frontend
+# npm run build
+# rsync -r ./build/ ${TARGET_HOST}:${TARGET_PATH}/build
+
+# Build backend executable and upload it to rasp_leds/
+cd backend
+cargo build --release --target ${TARGET_ARCH}
+rsync ${SOURCE_PATH} ${TARGET_HOST}:${TARGET_PATH}/backend
+ssh -t ${TARGET_HOST} sudo ROCKET_ENV=${ROCKET_MODE} ${TARGET_PATH}/backend

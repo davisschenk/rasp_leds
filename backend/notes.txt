@@ -1,0 +1,106 @@
+{
+  "type": "pattern",
+  "data": {
+    "pattern": "moving_dot",
+    "tick_rate": 10,
+    "tick_cycle": 300,
+    "color": [0, 255, 0, 0]
+  }
+}
+
+{
+  "type": "pattern",
+  "data": {
+    "pattern": "strobe",
+    "tick_rate": 10,
+    "color": [0, 255, 0, 0]
+  }
+}
+
+
+{
+  "type": "pattern",
+  "data": {
+    "pattern": "solid",
+    "color": [0, 255, 0, 0]
+  }
+}
+
+{
+  "type": "pattern",
+  "data": {
+    "pattern": "random",
+    "tick_rate": 100
+  }
+}
+
+{
+  "type": "idle",
+  "data": {
+  	"clear": true
+  }
+}
+
+{
+  "type": "pattern",
+  "data": {
+    "pattern": "meteor",
+    "tick_rate": 100,
+    "color": [255, 0, 255, 0],
+    "random_decay": true,
+    "decay": 128,
+    "size": 16
+  }
+}
+
+{
+  "type": "pattern",
+  "data": {
+    "pattern": "rainbow_cycle",
+    "tick_rate": 100
+  }
+}
+
+{
+  "type": "pattern",
+  "data": {
+    "pattern": "timer",
+    "tick_rate": 100,
+    "color": [255,0,0,0],
+    "timestamp": "2021-05-26 18:30:00"
+  }
+}
+
+{
+  "type": "pattern",
+  "data": {
+    "pattern": "alternating",
+    "colors": [
+      {
+      	"count": 2,
+        "color": [255, 255, 0, 0]
+      },
+      {
+      	"count": 3,
+        "color": [255, 0, 255, 0]
+      },
+      {
+      	"count": 2,
+        "color": [0, 255, 255, 0]
+      } 
+     ]
+  }
+}
+
+Color Order: BGRA
+
+Runner State Machine
+
+Idle -> wait for message with blocking
+Pattern -> {
+    call start_tick on pattern
+    increment tick
+    check for message no blocking {
+
+    }
+}
