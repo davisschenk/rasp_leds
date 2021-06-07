@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name BOB-12009)(type Legacy)(uri "/home/davis/Developer/Circuit Design/BOB-120009 Level Converter/BOB-12009.lib")(options "")(descr ""))
+  (lib (name raspberrypi-led-hat-rescue)(type Legacy)(uri ${KIPRJMOD}/raspberrypi-led-hat-rescue.lib)(options "")(descr ""))
+)
