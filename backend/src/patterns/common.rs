@@ -38,17 +38,22 @@ pub enum TickAction {
 
 #[enum_dispatch]
 pub trait Pattern {
+    /// Called when pattern is loaded into runner, result is returned over the API
     fn init(&self, _runner: &runner::RunnerInner) -> Result<(), String> {
         Ok(())
     }
+    /// Define the number of ms between ticks
     fn tick_rate(&self) -> u64;
+    /// Defines tick_cycle which is passed into start_tick
     fn tick_cycle(&self) -> Option<u64>;
+    /// Runs a single tick, doesnt neeed to be overwritten
     fn start_tick(&mut self, raw_tick: u64, leds: &mut [[u8; 4]]) -> TickResult {
         match self.tick_cycle() {
             Some(cycle) => self.tick(raw_tick % cycle, leds),
             None => self.tick(raw_tick, leds),
         }
     }
+    /// This is where the tick behavior needs to be implemented, modify the mutable leds array and then return a tickresult to decide how the runner handles it.
     fn tick(&mut self, tick: u64, leds: &mut [[u8; 4]]) -> TickResult;
 }
 

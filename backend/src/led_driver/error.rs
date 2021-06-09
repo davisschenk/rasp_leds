@@ -12,6 +12,7 @@ pub enum LedResponse {
     Error { message: String },
 }
 
+/// Custom responder to convert an LedResponse to a json response with a status code
 impl<'a> Responder<'a> for LedResponse {
     fn respond_to(self, _: &Request) -> response::Result<'a> {
         Response::build()

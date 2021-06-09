@@ -20,7 +20,7 @@ impl Pattern for RainbowCycle {
         Some(256 * 5)
     }
     fn tick(&mut self, tick: u64, leds: &mut [[u8; 4]]) -> TickResult {
-        for i in 0..crate::COUNT as usize {
+        for i in 0..leds.len() {
             leds[i] = wheel((((i as f64 * 256.0 / crate::COUNT as f64) as u64 + tick) & 255) as u8);
         }
 

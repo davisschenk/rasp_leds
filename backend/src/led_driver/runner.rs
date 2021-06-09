@@ -198,7 +198,7 @@ impl RunnerInner {
     /// `pattern` A varient of Patterns
     fn handle_pattern_message(&mut self, pattern: Patterns) -> Result<(), String> {
         if let Err(s) = pattern.init(self) {
-            println!("error {}", s);
+            println!("error in pattern init {}", s);
             return Err(s);
         }
 

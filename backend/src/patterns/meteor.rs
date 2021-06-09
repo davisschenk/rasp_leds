@@ -16,7 +16,7 @@ impl Pattern for Meteor {
         self.tick_rate
     }
     fn tick_cycle(&self) -> Option<u64> {
-        Some(350)
+        Some(crate::COUNT as u64 + self.size as u64)
     }
     fn tick(&mut self, tick: u64, leds: &mut [[u8; 4]]) -> TickResult {
         let mut rng = rand::thread_rng();
