@@ -1,85 +1,11 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# BOB-12009_BOB-12009
+# Connector_Generic:Conn_02x20_Odd_Even
 #
-DEF BOB-12009_BOB-12009 U 0 40 Y Y 1 L N
-F0 "U" -500 450 50 H V L BNN
-F1 "BOB-12009_BOB-12009" -500 -600 50 H V L BNN
-F2 "CONV_BOB-12009" 0 0 50 H I L BNN
-F3 "" 0 0 50 H I L BNN
-F4 "SparkFun Electronics" 0 0 50 H I L BNN "MANUFACTURER"
-F5 "N/A" 0 0 50 H I L BNN "MAXIMUM_PACKAGE_HEIGHT"
-F6 "Manufacturer Recommendations" 0 0 50 H I L BNN "STANDARD"
-F7 "01" 0 0 50 H I L BNN "PARTREV"
-DRAW
-S -500 -500 500 400 0 0 10 f
-X GND GND_1 700 -400 200 L 40 40 0 0 W
-X GND GND_2 700 -400 200 L 40 40 0 0 W
-X HV HV 700 300 200 L 40 40 0 0 B
-X HV1 HV1 700 100 200 L 40 40 0 0 B
-X HV2 HV2 700 0 200 L 40 40 0 0 B
-X HV3 HV3 700 -100 200 L 40 40 0 0 B
-X HV4 HV4 700 -200 200 L 40 40 0 0 B
-X LV LV -700 300 200 R 40 40 0 0 B
-X LV1 LV1 -700 100 200 R 40 40 0 0 B
-X LV2 LV2 -700 0 200 R 40 40 0 0 B
-X LV3 LV3 -700 -100 200 R 40 40 0 0 B
-X LV4 LV4 -700 -200 200 R 40 40 0 0 B
-ENDDRAW
-ENDDEF
-#
-# Connector_Barrel_Jack
-#
-DEF Connector_Barrel_Jack J 0 40 Y Y 1 F N
-F0 "J" 0 210 50 H V C CNN
-F1 "Connector_Barrel_Jack" 0 -200 50 H V C CNN
-F2 "" 50 -40 50 H I C CNN
-F3 "" 50 -40 50 H I C CNN
-ALIAS Jack-DC
-$FPLIST
- BarrelJack*
-$ENDFPLIST
-DRAW
-A -130 100 25 901 -901 0 1 10 F -130 125 -130 75
-A -130 100 25 901 -901 0 1 10 N -130 125 -130 75
-S -200 150 200 -150 0 1 10 f
-S 145 125 -130 75 0 1 10 F
-P 2 0 1 10 200 100 150 100 N
-P 6 0 1 10 -150 -100 -100 -100 -50 -50 0 -100 100 -100 200 -100 N
-X ~ 1 300 100 100 L 50 50 1 1 P
-X ~ 2 300 -100 100 L 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# Connector_Conn_01x03_Male
-#
-DEF Connector_Conn_01x03_Male J 0 40 Y N 1 F N
-F0 "J" 0 200 50 H V C CNN
-F1 "Connector_Conn_01x03_Male" 0 -200 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-$FPLIST
- Connector*:*_1x??_*
-$ENDFPLIST
-DRAW
-S 34 -95 0 -105 1 1 6 F
-S 34 5 0 -5 1 1 6 F
-S 34 105 0 95 1 1 6 F
-P 2 1 1 6 50 -100 34 -100 N
-P 2 1 1 6 50 0 34 0 N
-P 2 1 1 6 50 100 34 100 N
-X Pin_1 1 200 100 150 L 50 50 1 1 P
-X Pin_2 2 200 0 150 L 50 50 1 1 P
-X Pin_3 3 200 -100 150 L 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# Connector_Generic_Conn_02x20_Odd_Even
-#
-DEF Connector_Generic_Conn_02x20_Odd_Even J 0 40 Y N 1 F N
+DEF Connector_Generic:Conn_02x20_Odd_Even J 0 40 Y N 1 F N
 F0 "J" 50 1000 50 H V C CNN
-F1 "Connector_Generic_Conn_02x20_Odd_Even" 50 -1100 50 H V C CNN
+F1 "Connector_Generic:Conn_02x20_Odd_Even" 50 -1100 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -170,11 +96,27 @@ X Pin_9 9 -200 500 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# power_+3.3V
+# Mechanical:Mounting_Hole
 #
-DEF power_+3.3V #PWR 0 0 Y Y 1 F P
+DEF Mechanical:Mounting_Hole MK 0 40 Y Y 1 F N
+F0 "MK" 0 200 50 H V C CNN
+F1 "Mechanical:Mounting_Hole" 0 125 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Mounting?Hole*
+ Hole*
+$ENDFPLIST
+DRAW
+C 0 0 50 0 1 50 N
+ENDDRAW
+ENDDEF
+#
+# power:+3.3V
+#
+DEF power:+3.3V #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
-F1 "power_+3.3V" 0 140 50 H V C CNN
+F1 "power:+3.3V" 0 140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 ALIAS +3.3V
@@ -186,11 +128,11 @@ X +3V3 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# power_+5V
+# power:+5V
 #
-DEF power_+5V #PWR 0 0 Y Y 1 F P
+DEF power:+5V #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
-F1 "power_+5V" 0 140 50 H V C CNN
+F1 "power:+5V" 0 140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -201,32 +143,16 @@ X +5V 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# power_GND
+# power:GND
 #
-DEF power_GND #PWR 0 0 Y Y 1 F P
+DEF power:GND #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -250 50 H I C CNN
-F1 "power_GND" 0 -150 50 H V C CNN
+F1 "power:GND" 0 -150 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
 P 6 0 1 0 0 0 0 -50 50 -50 0 -100 -50 -50 0 -50 N
 X GND 1 0 0 0 D 50 50 1 1 W N
-ENDDRAW
-ENDDEF
-#
-# raspberrypi-led-hat-rescue_Mounting_Hole-Mechanical-raspberrypi-led-hat-rescue
-#
-DEF raspberrypi-led-hat-rescue_Mounting_Hole-Mechanical-raspberrypi-led-hat-rescue MK 0 40 Y Y 1 F N
-F0 "MK" 0 200 50 H V C CNN
-F1 "raspberrypi-led-hat-rescue_Mounting_Hole-Mechanical-raspberrypi-led-hat-rescue" 0 125 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-$FPLIST
- Mounting?Hole*
- Hole*
-$ENDFPLIST
-DRAW
-C 0 0 50 0 1 50 N
 ENDDRAW
 ENDDEF
 #

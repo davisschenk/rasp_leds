@@ -1,3 +1,4 @@
 (fp_lib_table
-  (lib (name "BOB-120009 Level Converter")(type KiCad)(uri "/home/davis/Developer/Circuit Design/BOB-120009 Level Converter")(options "")(descr ""))
+  (lib (name footprints)(type KiCad)(uri ${KIPRJMOD}/symbols/CON_430450400_MOL/footprints.pretty)(options "")(descr ""))
+  (lib (name "BOB-120009 Level Converter")(type KiCad)(uri "${KIPRJMOD}/symbols/BOB-120009 Level Converter")(options "")(descr ""))
 )

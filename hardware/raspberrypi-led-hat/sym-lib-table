@@ -1,4 +1,5 @@
 (sym_lib_table
-  (lib (name BOB-12009)(type Legacy)(uri "./BOB-120009 Level Converter/BOB-12009.lib")(options "")(descr ""))
-  (lib (name raspberrypi-led-hat-rescue)(type Legacy)(uri ${KIPRJMOD}/raspberrypi-led-hat-rescue.lib)(options "")(descr ""))
+  (lib (name raspberrypi-led-hat-2-rescue)(type Legacy)(uri ${KIPRJMOD}/raspberrypi-led-hat-2-rescue.lib)(options "")(descr ""))
+  (lib (name BOB-12009)(type Legacy)(uri "${KIPRJMOD}/symbols/BOB-120009 Level Converter/BOB-12009.lib")(options "")(descr ""))
+  (lib (name CON_430450400)(type Legacy)(uri ${KIPRJMOD}/symbols/CON_430450400_MOL/2021-06-09_03-17-22.lib)(options "")(descr ""))
 )
