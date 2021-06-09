@@ -1,5 +1,9 @@
 name: rustdoc
 on:
+  workflow_dispatch:
+    inputs:
+      docs:
+        description: Build the docs
   push:
     branch: master
     paths: 
@@ -19,6 +23,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Install LibClang
+      run: sudo apt-get install libclang-dev
+      
     - name: Install Rust toolchain
       uses: actions-rs/toolchain@v1
       with:
@@ -30,6 +37,9 @@ jobs:
     - name: Build Documentation
       run: cargo doc --all --no-deps
       working-directory: ./backend
+      
+    - name: Create index.html
+      run: echo '<meta http-equiv=refresh content=0;url=rasp_leds/index.html>' > ./backend/target/doc/index.html
 
     - name: Deploy Docs
       uses: peaceiris/actions-gh-pages@364c31d33bb99327c77b3a5438a83a357a6729ad # v3.4.0
