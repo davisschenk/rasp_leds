@@ -5,9 +5,6 @@ use std::iter;
 #[derive(Deserialize)]
 pub struct Solid {
     pub color: [u8; 4],
-
-    #[serde(skip, default = "bool::default")]
-    rendered: bool,
 }
 
 impl Pattern for Solid {
@@ -22,12 +19,7 @@ impl Pattern for Solid {
             *i = self.color;
         }
 
-        if !self.rendered {
-            self.rendered = true;
-            Ok(TickAction::Render)
-        } else {
-            Ok(TickAction::Idle)
-        }
+        Ok(TickAction::RenderOnce)
     }
 }
 
@@ -40,9 +32,6 @@ pub struct AlternatingColor {
 #[derive(Deserialize)]
 pub struct Alternating {
     pub colors: Vec<AlternatingColor>,
-
-    #[serde(skip, default = "bool::default")]
-    rendered: bool,
 }
 
 impl Pattern for Alternating {
@@ -62,11 +51,6 @@ impl Pattern for Alternating {
             .zip(leds.iter_mut())
             .for_each(|(c, l)| *l = c);
 
-        if !self.rendered {
-            self.rendered = true;
-            Ok(TickAction::Render)
-        } else {
-            Ok(TickAction::Idle)
-        }
+        Ok(TickAction::RenderOnce)
     }
 }

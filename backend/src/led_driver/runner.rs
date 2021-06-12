@@ -139,6 +139,11 @@ impl RunnerInner {
 
             match pattern.start_tick(tick, leds) {
                 Ok(TickAction::Render) => controller.render().unwrap(),
+                Ok(TickAction::RenderOnce) => {
+                    controller.render().unwrap();
+                    self.state = RunnerState::Idle(false);
+                    break;
+                }
                 Ok(TickAction::Idle) => {
                     self.state = RunnerState::Idle(false);
                     break;

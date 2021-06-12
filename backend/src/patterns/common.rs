@@ -32,6 +32,7 @@ pub enum Message {
 
 pub enum TickAction {
     Render,
+    RenderOnce,
     None,
     Idle,
 }
