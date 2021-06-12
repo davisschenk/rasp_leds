@@ -59,9 +59,7 @@ pub trait Pattern {
 }
 
 pub fn reset(leds: &mut [[u8; 4]]) {
-    for i in leds.iter_mut() {
-        *i = [0, 0, 0, 0];
-    }
+    leds.iter_mut().for_each(|m| *m = [0 ; 4]);
 }
 
 pub fn wheel(position: u8) -> [u8; 4] {

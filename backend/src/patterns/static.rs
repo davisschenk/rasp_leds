@@ -15,9 +15,10 @@ impl Pattern for Solid {
         None
     }
     fn tick(&mut self, _tick: u64, leds: &mut [[u8; 4]]) -> TickResult {
-        for i in leds.iter_mut() {
-            *i = self.color;
-        }
+        leds
+            .iter_mut()
+            .for_each(|m| *m = self.color);
+
 
         Ok(TickAction::RenderOnce)
     }
