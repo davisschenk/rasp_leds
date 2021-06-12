@@ -1,13 +1,13 @@
+use super::common::*;
 use serde::Deserialize;
 use std::iter;
-use super::common::*;
 
 #[derive(Deserialize)]
 pub struct Solid {
     pub color: [u8; 4],
 
-    #[serde(skip, default="bool::default")]
-    rendered: bool
+    #[serde(skip, default = "bool::default")]
+    rendered: bool,
 }
 
 impl Pattern for Solid {
@@ -34,17 +34,16 @@ impl Pattern for Solid {
 #[derive(Deserialize)]
 pub struct AlternatingColor {
     count: u8,
-    color: [u8 ; 4]
+    color: [u8; 4],
 }
 
 #[derive(Deserialize)]
 pub struct Alternating {
     pub colors: Vec<AlternatingColor>,
 
-    #[serde(skip, default="bool::default")]
-    rendered: bool
+    #[serde(skip, default = "bool::default")]
+    rendered: bool,
 }
-
 
 impl Pattern for Alternating {
     fn tick_rate(&self) -> u64 {

@@ -57,7 +57,6 @@ pub trait Pattern {
     fn tick(&mut self, tick: u64, leds: &mut [[u8; 4]]) -> TickResult;
 }
 
-
 pub fn reset(leds: &mut [[u8; 4]]) {
     for i in leds.iter_mut() {
         *i = [0, 0, 0, 0];
