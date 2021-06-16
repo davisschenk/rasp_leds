@@ -1,16 +1,2 @@
-# flutter_frontend
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Frontend
+I initially tried to build the frontend using ReactJS, but eventually moved to flutter because I was having a hard time relearning web design with JS/HTML/CSS, and I also just do not enjoy interacting with JS. Fortunately for me I have some previous experience developing with flutter, and it will also allow me to easily build my frontend for web, android, ios, etc with minimal effort. Currently I am just using the most basic option for state management (`setState({})`) because currently there isnt very much complex state, eventually I may opt to upgrade to another solution, but currently it works good enough. UI design is not my strong suit, but hopefully I will have this looking nice and clean eventually but for now im focused on just getting something working.
