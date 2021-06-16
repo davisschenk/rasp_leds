@@ -14,8 +14,8 @@ readonly ROCKET_MODE=staging
 # Build frontend and upload it to rasp_leds/build if -w flag is set
 if [ "$#" != "0" ] && [ "$1" == "-w" ]; then
     cd frontend
-    npm run build
-    rsync -r ./build/ ${TARGET_HOST}:${TARGET_PATH}/build
+    flutter build web
+    rsync -r ./build/web/ ${TARGET_HOST}:${TARGET_PATH}/web
     cd ..
 fi
 

@@ -38,7 +38,7 @@ fn main() {
 
     rocket::ignite()
         .manage(managed_runner)
-        .mount("/", StaticFiles::from("/home/pi/rasp_leds/build"))
+        .mount("/", StaticFiles::from("/home/pi/rasp_leds/web"))
         .mount("/api", routes![pattern])
         .launch();
 }
