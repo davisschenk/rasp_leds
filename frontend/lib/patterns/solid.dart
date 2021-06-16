@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:http/http.dart' as http;
+import 'common.dart';
 
 class Solid extends StatefulWidget {
   Solid({Key? key}) : super(key: key);
@@ -11,13 +12,20 @@ class Solid extends StatefulWidget {
   _SolidState createState() => _SolidState();
 }
 
-class _SolidState extends State<Solid> {
+class _SolidState extends State<Solid> with Message, Pattern {
   Color color = Color(0xff000000);
 
   void changeColor(Color newColor) {
     setState(() {
       color = newColor;
     });
+  }
+
+  Map<String, dynamic> getData() {
+    return {
+      "pattern": "solid",
+      "color": [color.blue, color.green, color.red, 0],
+    };
   }
 
   @override
@@ -75,20 +83,7 @@ class _SolidState extends State<Solid> {
       ElevatedButton(
           child: Text("Set Color"),
           onPressed: () async {
-            var url = Uri.parse("http://192.168.0.6:8000/api/pattern");
-
-            http
-                .post(url, headers: <String, String>{
-                  'Content-Type': 'application/json; charset=UTF-8',
-                }, body: ''' 
-                      {
-                        "type": "pattern",
-                        "data": {
-                          "pattern": "solid",
-                          "color": [${color.blue}, ${color.green}, ${color.red}, 0]
-                        }
-                      }
-                    ''')
+            sendMessage(SERVER_URL)
                 .then((resp) => {
                       if (resp.statusCode != 200)
                         showDialog(

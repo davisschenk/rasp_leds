@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_frontend/patterns/meteor.dart';
 import 'patterns/solid.dart';
+import 'patterns/common.dart';
 
 void main() {
   runApp(MyApp());
@@ -58,19 +59,52 @@ class _MyHomePageState extends State<MyHomePage> {
           child: ListView(
             children: [
               DrawerHeader(
-                  decoration:
-                      BoxDecoration(color: Theme.of(context).primaryColor),
-                  child: Text("LED Commands")),
+                decoration:
+                    BoxDecoration(color: Theme.of(context).primaryColor),
+                child: Column(children: [
+                  Text("LED Commands"),
+                  Row(
+                    children: [
+                      ElevatedButton.icon(
+                          label: Text("Power"),
+                          onPressed: () {
+                            Idle(clear: true)
+                                .sendMessage(SERVER_URL)
+                                .then((resp) => {
+                                      if (resp.statusCode != 200)
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: Text(
+                                                    "Error setting pattern!"),
+                                                content: Text(resp.body),
+                                              );
+                                            })
+                                    })
+                                .catchError((e) => print(e));
+                          },
+                          icon: Icon(Icons.power))
+                    ],
+                  )
+                ]),
+              ),
               ExpansionTile(
                 title: Text("Patterns"),
                 children: [
                   ListTile(
                     title: Text("Solid"),
-                    onTap: () => navigationTapped(0),
+                    onTap: () {
+                      navigationTapped(0);
+                      Navigator.pop(context);
+                    },
                   ),
                   ListTile(
                     title: Text("Meteor"),
-                    onTap: () => navigationTapped(1),
+                    onTap: () {
+                      navigationTapped(1);
+                      Navigator.pop(context);
+                    },
                   )
                 ],
               )

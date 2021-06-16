@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
-import 'package:http/http.dart' as http;
+import 'common.dart';
 
 class Meteor extends StatefulWidget {
   Meteor({Key? key}) : super(key: key);
@@ -11,7 +9,7 @@ class Meteor extends StatefulWidget {
   _MeteorState createState() => _MeteorState();
 }
 
-class _MeteorState extends State<Meteor> {
+class _MeteorState extends State<Meteor> with Message, Pattern {
   Color color = Color(0xff000000);
   int tick_rate = 100;
   int decay = 128;
@@ -48,6 +46,17 @@ class _MeteorState extends State<Meteor> {
     });
   }
 
+  Map<String, dynamic> getData() {
+    return {
+      "pattern": "meteor",
+      "tick_rate": tick_rate,
+      "color": [color.blue, color.green, color.red, 0],
+      "random_decay": random_decay,
+      "decay": decay,
+      "size": size
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -55,8 +64,6 @@ class _MeteorState extends State<Meteor> {
       Row(children: [
         Text("Solid Color: "),
         ColorIndicator(
-            width: 40,
-            height: 40,
             borderRadius: 0,
             color: color,
             elevation: 1,
@@ -70,8 +77,6 @@ class _MeteorState extends State<Meteor> {
                 color,
                 title: Text('ColorPicker',
                     style: Theme.of(context).textTheme.headline6),
-                width: 40,
-                height: 40,
                 spacing: 0,
                 runSpacing: 0,
                 borderRadius: 0,
@@ -90,7 +95,7 @@ class _MeteorState extends State<Meteor> {
                 actionButtons: const ColorPickerActionButtons(
                   okButton: true,
                   closeButton: true,
-                  dialogActionButtons: false,
+                  dialogActionButtons: true,
                 ),
                 constraints: const BoxConstraints(
                     minHeight: 480, minWidth: 320, maxWidth: 320),
@@ -145,24 +150,7 @@ class _MeteorState extends State<Meteor> {
       ElevatedButton(
           child: Text("Set Pattern"),
           onPressed: () async {
-            var url = Uri.parse("http://192.168.0.6:8000/api/pattern");
-
-            http
-                .post(url, headers: <String, String>{
-                  'Content-Type': 'application/json; charset=UTF-8',
-                }, body: ''' 
-                      {
-                        "type": "pattern",
-                        "data": {
-                          "pattern": "meteor",
-                          "tick_rate": ${tick_rate},
-                          "color": [${color.blue}, ${color.green}, ${color.red}, 0],
-                          "random_decay": ${random_decay},
-                          "decay": ${decay},
-                          "size": ${size}
-                        }
-                      }
-                    ''')
+            sendMessage(SERVER_URL)
                 .then((resp) => {
                       if (resp.statusCode != 200)
                         showDialog(

@@ -1,23 +1,38 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-class Solid extends StatefulWidget {
-  Solid({Key? key}) : super(key: key);
+var  SERVER_URL = Uri.parse("http://192.168.0.6:8000/api/pattern");
 
-  @override
-  _SolidState createState() => _SolidState();
+mixin Message {
+  String get type;
+  Map<String, dynamic> getData();
+  Map<String, dynamic> toJson() {
+    return {"type": this.type, "data": getData()};
+  }
+
+  Future<http.Response> sendMessage(Uri url) {
+    var encoded_message = json.encode(this.toJson());
+    var headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+    };
+
+    return http.post(url, body: encoded_message, headers: headers);
+  }
 }
 
-class _SolidState extends State<Solid> {
-  final _state = GlobalKey<FormState>();
+mixin Pattern on Message {
+  String get type => "pattern";
+}
 
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: _state,
-      child: Column(
-        children: [],
-      
-      ),
-    );
+class Idle with Message {
+  String get type => "idle";
+  bool clear;
+
+  Idle({this.clear = false});
+
+  Map<String, dynamic> getData() {
+    return {
+      "clear": clear
+    };
   }
 }
