@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["RunnerState",""]],"struct":[["Runner",""],["RunnerInner",""]],"type":[["BoxedPattern",""],["MessageReceiver",""],["MessageSender",""],["ResultReceiver",""],["ResultSender",""]]});

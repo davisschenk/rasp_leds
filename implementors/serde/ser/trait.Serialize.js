@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["rasp_leds"] = [{"text":"impl <a class=\"trait\" href=\"https://docs.rs/serde/1.0.125/serde/ser/trait.Serialize.html\" title=\"trait serde::ser::Serialize\">Serialize</a> for <a class=\"enum\" href=\"rasp_leds/led_driver/error/enum.LedResponse.html\" title=\"enum rasp_leds::led_driver::error::LedResponse\">LedResponse</a>","synthetic":false,"types":["rasp_leds::led_driver::error::LedResponse"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

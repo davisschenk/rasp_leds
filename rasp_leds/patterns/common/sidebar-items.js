@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Message",""],["Patterns",""],["PowerMode",""],["TickAction",""]],"fn":[["reset",""],["wheel",""]],"trait":[["Pattern",""]],"type":[["TickResult",""]]});
