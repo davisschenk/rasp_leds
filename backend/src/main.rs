@@ -13,13 +13,8 @@ use std::sync::{Arc, Mutex};
 type StateRunner<'a> = State<'a, Arc<Mutex<led_driver::Runner>>>;
 
 const PIN: i32 = 18;
-const COUNT: i32 = 286;
-const BRIGHTNESS: u8 = 32;
-
-#[get("/")]
-fn index() -> &'static str {
-    "Hello, world!"
-}
+const COUNT: i32 = 300;
+const BRIGHTNESS: u8 = 128;
 
 #[post("/pattern", data = "<data>")]
 fn pattern(data: Data, runner: StateRunner) -> led_driver::LedResponse {

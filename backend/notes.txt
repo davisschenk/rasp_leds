@@ -42,6 +42,13 @@
 }
 
 {
+  "type": "power",
+  "data": {
+  	"mode": "On"
+  }
+}
+
+{
   "type": "pattern",
   "data": {
     "pattern": "meteor",
@@ -89,6 +96,15 @@
         "color": [0, 255, 255, 0]
       } 
      ]
+  }
+}
+
+{
+  "type": "pattern",
+  "data": {
+    "pattern": "rotate",
+    "tick_rate": 1000,
+    "direction": "counter"
   }
 }
 

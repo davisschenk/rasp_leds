@@ -23,11 +23,19 @@ pub enum Patterns {
 }
 
 #[derive(Deserialize)]
+#[serde(rename_all = "snake_case", tag = "mode")]
+pub enum PowerMode {
+    On,
+    Off,
+    Toggle,
+}
+
+#[derive(Deserialize)]
 #[serde(rename_all = "snake_case")]
 #[serde(tag = "type", content = "data")]
 pub enum Message {
     Pattern(Patterns),
-    Idle { clear: bool },
+    Power(PowerMode),
 }
 
 pub enum TickAction {
@@ -59,7 +67,7 @@ pub trait Pattern {
 }
 
 pub fn reset(leds: &mut [[u8; 4]]) {
-    leds.iter_mut().for_each(|m| *m = [0 ; 4]);
+    leds.iter_mut().for_each(|m| *m = [0; 4]);
 }
 
 pub fn wheel(position: u8) -> [u8; 4] {

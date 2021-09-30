@@ -40,6 +40,8 @@ pub struct RunnerInner {
     state: RunnerState,
     message_receiver: MessageReceiver,
     result_sender: ResultSender,
+    last_message: Option<String>,
+    on: bool,
 }
 
 impl Runner {
@@ -61,6 +63,8 @@ impl Runner {
                 state: RunnerState::Idle(true),
                 result_sender: result_sender,
                 message_receiver: message_receiver,
+                last_message: None,
+                on: false,
             })),
             message_sender,
             result_receiver,
@@ -137,6 +141,7 @@ impl RunnerInner {
         while let RunnerState::Pattern(pattern) = &mut self.state {
             let leds = controller.leds_mut(0);
 
+            println!("Ticking");
             match pattern.start_tick(tick, leds) {
                 Ok(TickAction::Render) => controller.render().unwrap(),
                 Ok(TickAction::RenderOnce) => {
@@ -169,19 +174,44 @@ impl RunnerInner {
     fn handle_message(&mut self, raw_message: String) {
         let mut sent = false;
         match serde_json::from_str::<Message>(&raw_message) {
-            Ok(message) => match message {
-                Message::Idle { clear } => self.state = RunnerState::Idle(clear),
-                Message::Pattern(pattern) => {
-                    self.handle_pattern_message(pattern)
-                        .map_err(|e| {
-                            sent = true;
-                            self.result_sender
-                                .send(LedResponse::Error { message: e })
-                                .unwrap();
-                        })
-                        .unwrap();
+            Ok(message) => {
+                match message {
+                    Message::Power(mode) => match mode {
+                        PowerMode::Off => {
+                            self.state = RunnerState::Idle(true);
+                        }
+                        PowerMode::On => {
+                            if let Some(message) = &self.last_message {
+                                self.handle_message(message.to_string())
+                            }
+                        }
+                        PowerMode::Toggle => {
+                            if self.on {
+                                self.state = RunnerState::Idle(true);
+                                self.on = false;
+                            } else {
+                                if let Some(message) = &self.last_message {
+                                    self.handle_message(message.to_string())
+                                }
+                                self.on = true;
+                            }
+                        }
+                    },
+                    Message::Pattern(pattern) => {
+                        self.last_message = Some(raw_message.clone());
+                        self.on = true;
+
+                        self.handle_pattern_message(pattern)
+                            .map_err(|e| {
+                                sent = true;
+                                self.result_sender
+                                    .send(LedResponse::Error { message: e })
+                                    .unwrap();
+                            })
+                            .unwrap();
+                    }
                 }
-            },
+            }
             Err(error) => {
                 sent = true;
                 self.result_sender

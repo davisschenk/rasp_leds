@@ -6,6 +6,7 @@ pub mod random;
 pub mod r#static;
 pub mod strobe;
 pub mod timer;
+pub mod animations;
 
 pub use common::*;
 pub use meteor::Meteor;
@@ -16,3 +17,4 @@ pub use rainbow::RainbowCycle;
 pub use random::Random;
 pub use strobe::Strobe;
 pub use timer::Timer;
+pub use animations::Rotate;
