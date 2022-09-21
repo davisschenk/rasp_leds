@@ -174,44 +174,42 @@ impl RunnerInner {
     fn handle_message(&mut self, raw_message: String) {
         let mut sent = false;
         match serde_json::from_str::<Message>(&raw_message) {
-            Ok(message) => {
-                match message {
-                    Message::Power(mode) => match mode {
-                        PowerMode::Off => {
-                            self.state = RunnerState::Idle(true);
+            Ok(message) => match message {
+                Message::Power(mode) => match mode {
+                    PowerMode::Off => {
+                        self.state = RunnerState::Idle(true);
+                    }
+                    PowerMode::On => {
+                        if let Some(message) = &self.last_message {
+                            self.handle_message(message.to_string())
                         }
-                        PowerMode::On => {
+                    }
+                    PowerMode::Toggle => {
+                        if self.on {
+                            self.state = RunnerState::Idle(true);
+                            self.on = false;
+                        } else {
                             if let Some(message) = &self.last_message {
                                 self.handle_message(message.to_string())
                             }
+                            self.on = true;
                         }
-                        PowerMode::Toggle => {
-                            if self.on {
-                                self.state = RunnerState::Idle(true);
-                                self.on = false;
-                            } else {
-                                if let Some(message) = &self.last_message {
-                                    self.handle_message(message.to_string())
-                                }
-                                self.on = true;
-                            }
-                        }
-                    },
-                    Message::Pattern(pattern) => {
-                        self.last_message = Some(raw_message.clone());
-                        self.on = true;
-
-                        self.handle_pattern_message(pattern)
-                            .map_err(|e| {
-                                sent = true;
-                                self.result_sender
-                                    .send(LedResponse::Error { message: e })
-                                    .unwrap();
-                            })
-                            .unwrap();
                     }
+                },
+                Message::Pattern(pattern) => {
+                    self.last_message = Some(raw_message.clone());
+                    self.on = true;
+
+                    self.handle_pattern_message(pattern)
+                        .map_err(|e| {
+                            sent = true;
+                            self.result_sender
+                                .send(LedResponse::Error { message: e })
+                                .unwrap();
+                        })
+                        .unwrap();
                 }
-            }
+            },
             Err(error) => {
                 sent = true;
                 self.result_sender

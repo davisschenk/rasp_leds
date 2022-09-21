@@ -24,15 +24,15 @@ mixin Pattern on Message {
   String get type => "pattern";
 }
 
-class Idle with Message {
-  String get type => "idle";
-  bool clear;
+class Power with Message {
+  String get type => "power";
+  String mode;
 
-  Idle({this.clear = false});
+  Power({this.mode = "toggle"});
 
   Map<String, dynamic> getData() {
     return {
-      "clear": clear
+      "mode": this.mode
     };
   }
 }
